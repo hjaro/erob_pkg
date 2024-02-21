@@ -15,7 +15,15 @@
     some main functions on javascript:
         - var ros = new ROSLIB.Ros();
 
-        -  ros.on(['error','connection','close'], function(error) {
+        -  ros.on(['error'], function(error) {
+                ...
+            });
+        
+        -  ros.on(['connection'], function(error) {
+                ...
+            });
+        
+        -  ros.on(['close'], function(error) {
                 ...
             });
 
