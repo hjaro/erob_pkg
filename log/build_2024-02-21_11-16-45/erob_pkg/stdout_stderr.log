@@ -1,0 +1,24 @@
+running develop
+running egg_info
+creating erob_pkg.egg-info
+writing erob_pkg.egg-info/PKG-INFO
+writing dependency_links to erob_pkg.egg-info/dependency_links.txt
+writing entry points to erob_pkg.egg-info/entry_points.txt
+writing requirements to erob_pkg.egg-info/requires.txt
+writing top-level names to erob_pkg.egg-info/top_level.txt
+writing manifest file 'erob_pkg.egg-info/SOURCES.txt'
+reading manifest file 'erob_pkg.egg-info/SOURCES.txt'
+writing manifest file 'erob_pkg.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/lib/python3.10/site-packages/erob-pkg.egg-link (link to .)
+Installing erob_node script to /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/lib/erob_pkg
+
+Installed /home/aro/ros2_ws/src/erob_pkg/build/erob_pkg
+running install_data
+creating /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/share/ament_index
+creating /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/share/ament_index/resource_index
+creating /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/share/ament_index/resource_index/packages
+copying resource/erob_pkg -> /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/share/ament_index/resource_index/packages
+copying package.xml -> /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/share/erob_pkg
+creating /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/share/erob_pkg/launch
+copying launch/test.launch.py -> /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/share/erob_pkg/launch

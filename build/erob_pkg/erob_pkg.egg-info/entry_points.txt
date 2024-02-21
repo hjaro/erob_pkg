@@ -1,0 +1,3 @@
+[console_scripts]
+erob_node = erob_pkg.erob_node:main
+

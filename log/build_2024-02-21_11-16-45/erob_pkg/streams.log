@@ -1,0 +1,26 @@
+[1.215s] Invoking command in '/home/aro/ros2_ws/src/erob_pkg/build/erob_pkg': PYTHONPATH=/home/aro/ros2_ws/src/erob_pkg/build/erob_pkg/prefix_override:/home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --editable --build-directory /home/aro/ros2_ws/src/erob_pkg/build/erob_pkg/build --no-deps install_data
+[1.503s] running develop
+[1.700s] running egg_info
+[1.700s] creating erob_pkg.egg-info
+[1.701s] writing erob_pkg.egg-info/PKG-INFO
+[1.701s] writing dependency_links to erob_pkg.egg-info/dependency_links.txt
+[1.701s] writing entry points to erob_pkg.egg-info/entry_points.txt
+[1.701s] writing requirements to erob_pkg.egg-info/requires.txt
+[1.702s] writing top-level names to erob_pkg.egg-info/top_level.txt
+[1.702s] writing manifest file 'erob_pkg.egg-info/SOURCES.txt'
+[1.703s] reading manifest file 'erob_pkg.egg-info/SOURCES.txt'
+[1.704s] writing manifest file 'erob_pkg.egg-info/SOURCES.txt'
+[1.705s] running build_ext
+[1.706s] Creating /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/lib/python3.10/site-packages/erob-pkg.egg-link (link to .)
+[1.707s] Installing erob_node script to /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/lib/erob_pkg
+[1.708s] 
+[1.708s] Installed /home/aro/ros2_ws/src/erob_pkg/build/erob_pkg
+[1.708s] running install_data
+[1.708s] creating /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/share/ament_index
+[1.708s] creating /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/share/ament_index/resource_index
+[1.709s] creating /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/share/ament_index/resource_index/packages
+[1.709s] copying resource/erob_pkg -> /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/share/ament_index/resource_index/packages
+[1.709s] copying package.xml -> /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/share/erob_pkg
+[1.709s] creating /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/share/erob_pkg/launch
+[1.709s] copying launch/test.launch.py -> /home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/share/erob_pkg/launch
+[1.730s] Invoked command in '/home/aro/ros2_ws/src/erob_pkg/build/erob_pkg' returned '0': PYTHONPATH=/home/aro/ros2_ws/src/erob_pkg/build/erob_pkg/prefix_override:/home/aro/ros2_ws/src/erob_pkg/install/erob_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --editable --build-directory /home/aro/ros2_ws/src/erob_pkg/build/erob_pkg/build --no-deps install_data
