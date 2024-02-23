@@ -17,12 +17,15 @@ from std_msgs.msg import String
 from sensor_msgs.msg import JointState
 
 master = pysoem.Master()
-# # master.open(r"\Device\NPF_{7FADE00F-793A-40F6-B97C-5DB7FEE9EADA}") 
+# master.open(r"\Device\NPF_{7FADE00F-793A-40F6-B97C-5DB7FEE9EADA}") 
 master.open("eno1") 
+# master.open("eth0") 
 
 number_of_slaves =6
 
-
+brake_Engage = 0x0300
+brake_Disengage = 0x0301
+brake_state = brake_Disengage
 
 # active_joint=[]
 # ----------------------------------
@@ -267,6 +270,7 @@ def device_PDO_setup(device):
     rx_map_obj = [
         0x160F,
         0x161C,
+        0x161D
     ]
     rx_map_obj_bytes = struct.pack(
         "Bx" + "".join(["H" for _ in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
@@ -327,9 +331,11 @@ def mainapp():
             download(master.slaves[0],0,0x2242,0,value=1,message='Reset Encoder')
 
             print('=================================================')
-             
+            
+            return number_of_slaves
         else:
             print('no device found')
+            return 0
 
         return master
 
@@ -403,7 +409,7 @@ def change_position(angle):
     # sleep(0.01)
     # # # set target position equal actual position
     for i in range(number_of_slaves):
-        master.slaves[i].output = struct.pack('ii', data[i][0],0) 
+        master.slaves[i].output = struct.pack('iii', data[i][0],0,brake_state) 
     
     # master.send_processdata()
     # master.receive_processdata(10)
@@ -490,7 +496,7 @@ def change_position(angle):
                         # print(f'flags: {flag} ----- {printAngles()} ---- {data}')
             if abs(data[n][0] - target[n]) > (2*basestep) and flag[n] == 0: 
                 # if getnbit(data[n][2],10,1) == 1:                                  
-                    master.slaves[n].output = struct.pack('ii', data[n][0] + step[n],output_velocity)
+                    master.slaves[n].output = struct.pack('iii', data[n][0] + step[n],output_velocity,brake_state)
 
             else:
                
@@ -573,6 +579,12 @@ class ErobNode(Node):
             self.listener_stop_callback,
             1)
         
+        self.subscription3 = self.create_subscription(
+            String,
+            'arm/disengage',
+            self.listener_disengage_callback,
+            1)
+        
 
         timer_period = 0.01
         self.publisher_ = self.create_publisher(JointState, 'arm/state', 10)
@@ -607,8 +619,16 @@ class ErobNode(Node):
     def listener_stop_callback(self,msg):
         print(f'Listener callback: ***** STOP *****')
         for i in range(number_of_slaves):
+            brake_state = brake_Engage
             step[i]=0
-        self.running = True
+        # self.running = True
+        
+
+    def listener_disengage_callback(self,msg):
+        print(f'Listener callback: ***** Disengage  *****')
+        for i in range(number_of_slaves):
+            brake_state = brake_Disengage
+        # self.running = False
         
 
 
@@ -619,6 +639,7 @@ class ErobNode(Node):
         angle=[0,0,0,0,0,0]
         sleep(0.01)
         print(f'Listener callback: {joints.position}')
+        basestep = int(joints.velocity[0])
         for i in range(number_of_slaves):
             data=struct.unpack('iiH',master.slaves[i].input)
             angle[i]= (((joints.position[i] * 180 )/ PI ) + 360)%360            
@@ -685,7 +706,8 @@ class RunNode(Node):
             #     # print(data)
             #     # print(target)
            
-            master.slaves[n].output = struct.pack('ii', data[n][0] + step[n] ,output_velocity)
+            master.slaves[n].output = struct.pack('iii', data[n][0] + step[n] ,output_velocity,brake_state)
+
             
             # if step[n]==0:
             #     master.slaves[n].output = struct.pack('ii', olddata[n]+ self.freerun,0)
@@ -739,21 +761,32 @@ class RunNode(Node):
 def main(args=None):
     rclpy.init(args=args)
     try:
-        mainapp()
-        mainNode = ErobNode()
-        runNode = RunNode()
 
-        executor = MultiThreadedExecutor(num_threads=2)
-        executor.add_node(mainNode)
-        executor.add_node(runNode)
-        
+        # adapters = pysoem.find_adapters()
 
-        try:
-            executor.spin()
-        finally:
-            executor.shutdown()
-            mainNode.destroy_node()
-            runNode.destroy_node()
+        # for i, adapter in enumerate(adapters):
+        #     print('Adapter {}'.format(i))
+        #     print('  {}'.format(adapter.name))
+        #     print('  {}'.format(adapter.desc))
+
+        if  mainapp() > 0:
+            mainNode = ErobNode()
+            runNode = RunNode()
+
+            for i in range(number_of_slaves):
+                step[i]=0
+
+            executor = MultiThreadedExecutor(num_threads=2)
+            executor.add_node(mainNode)
+            executor.add_node(runNode)
+            
+
+            try:
+                executor.spin()
+            finally:
+                executor.shutdown()
+                mainNode.destroy_node()
+                runNode.destroy_node()
     finally:
         rclpy.shutdown()
  
