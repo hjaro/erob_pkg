@@ -24,7 +24,6 @@ setup(
     entry_points={
         'console_scripts': [
             'erob_node = erob_pkg.erob_node:main',
-            'erob_node_brake = erob_pkg.erob_node_brake:main',
         ],
     },
 )

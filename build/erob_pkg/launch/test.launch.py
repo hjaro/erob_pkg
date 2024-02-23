@@ -1,1 +1,0 @@
-/home/aro/ros2_ws/src/erob_pkg/launch/test.launch.py
