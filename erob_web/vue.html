@@ -38,6 +38,37 @@
             cursor: pointer;
         }
 
+
+        .slider2 {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 15px;
+            border-radius: 5px;
+            background: #f7c7c7;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: 0.2s;
+            transition: opacity 0.2s;
+        }
+
+        .slider2::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4423ffd8;
+            cursor: pointer;
+        }
+
+        .slider2::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4423ffd8;
+            cursor: pointer;
+        }
+
         thead {
             position: sticky;
             top: 0;
@@ -115,13 +146,12 @@
                                 </div>
                                 <div class="col-md-6 col-sm-6 text-right">
 
-                                    <button @click="currentPosition" class="btn  btn-success ml-2"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-broadcast" viewBox="0 0 16 16">
-                                            <path
-                                                d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707m2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708m5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708m2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0" />
-                                        </svg></button>
-                                    <button class="btn  btn-primary ml-2">Active Keyboard</button>
+                                    <button @click="currentPosition" class="btn btn-sm   btn-success ml-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-r-circle" viewBox="0 0 16 16">
+                                            <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.5 4.002h3.11c1.71 0 2.741.973 2.741 2.46 0 1.138-.667 1.94-1.495 2.24L11.5 12H9.98L8.52 8.924H6.836V12H5.5zm1.335 1.09v2.777h1.549c.995 0 1.573-.463 1.573-1.36 0-.913-.596-1.417-1.537-1.417z"/>
+                                          </svg>
+                                    </button>
+                                    <button class="btn btn-sm  btn-primary ml-2">Active Keyboard</button>
                                 </div>
                             </div>
                         </div>
@@ -193,15 +223,16 @@
                                         class="slider mt-2" />
                                 </div>
                             </div>
-                            <div class="input-group mb-2">
+                            <hr>
+                            <div class="input-group mb-2 mt-2">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Speed:</span>
                                 </div>
-                                <input class="col-md-2 form-control" v-model="speed" max="1"
-                                    min="100" type="number" />
+                                <input class="col-md-2 form-control" v-model="speed" max="100"
+                                    min="1" type="number" />
                                 <div class="col-md-8">
                                     <input type="range" min="1" v-model="speed" max="100"
-                                        class="slider mt-2" />
+                                        class="slider2 mt-2" />
                                 </div>
                             </div>
 
@@ -501,7 +532,7 @@
                 getKey(evt) {
                     this.keyValue = evt.key
                     console.log(evt.key)
-                    this.speed = 100
+                    // this.speed = 25
                     switch (this.keyValue) {
                         case 'z':
                             this.j1--;
@@ -544,10 +575,13 @@
                         case 'p':
                             this.j6++;
                             break;
-
+                        case 'Enter' , 'Escape' , ' ':
+                            console.log('Stop');
+                            this.Stop()
+                            break;
                     }
                     this.send()
-                    this.speed = 400
+                    // this.speed = 100
                 },
 
             },
