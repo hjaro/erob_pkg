@@ -84,6 +84,9 @@
 
 <body>
 
+
+
+
     <div id="app" class="container mt-4">
         <div class="row">
             <div class="col-md-4">
@@ -134,11 +137,11 @@
 
 
 
-            <div class="col-md-8" v-on:keydown="getKey">
+            <div class="col-md-8">
                 <!-- actions -->
                 <div class="card">
                     <div class="card-header">
-                        <div >
+                        <div>
                             <div class="row">
 
                                 <div class="col-md-6 col-sm-6">
@@ -147,11 +150,14 @@
                                 <div class="col-md-6 col-sm-6 text-right">
 
                                     <button @click="currentPosition" class="btn btn-sm   btn-success ml-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-r-circle" viewBox="0 0 16 16">
-                                            <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.5 4.002h3.11c1.71 0 2.741.973 2.741 2.46 0 1.138-.667 1.94-1.495 2.24L11.5 12H9.98L8.52 8.924H6.836V12H5.5zm1.335 1.09v2.777h1.549c.995 0 1.573-.463 1.573-1.36 0-.913-.596-1.417-1.537-1.417z"/>
-                                          </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" class="bi bi-r-circle" viewBox="0 0 16 16">
+                                            <path
+                                                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.5 4.002h3.11c1.71 0 2.741.973 2.741 2.46 0 1.138-.667 1.94-1.495 2.24L11.5 12H9.98L8.52 8.924H6.836V12H5.5zm1.335 1.09v2.777h1.549c.995 0 1.573-.463 1.573-1.36 0-.913-.596-1.417-1.537-1.417z" />
+                                        </svg>
                                     </button>
-                                    <button class="btn btn-sm  btn-primary ml-2">Active Keyboard</button>
+                                    <button class="btn btn-sm  btn-primary ml-2" v-on:keydown="getKey">Active
+                                        Keyboard</button>
                                 </div>
                             </div>
                         </div>
@@ -228,24 +234,24 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Speed:</span>
                                 </div>
-                                <input class="col-md-2 form-control" v-model="speed" max="100"
-                                    min="1" type="number" />
+                                <input class="col-md-2 form-control" v-model="speed" max="100" min="1" type="number" />
                                 <div class="col-md-8">
-                                    <input type="range" min="1" v-model="speed" max="100"
-                                        class="slider2 mt-2" />
+                                    <input type="range" min="1" v-model="speed" max="100" class="slider2 mt-2" />
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-8 col-sm-8">
-                                    
 
-                                            <button class="mt-2 btn btn-primary" @click="send"> Move </button>
-                                     
+
+                                    <button class="mt-2 btn btn-primary" @click="send"> Move </button>
+                                    <button class="mt-2 btn btn-info ml-1" @click="Save"> Save Position </button>
+
                                 </div>
                                 <!-- <div class="col-md-4"></div> -->
                                 <div class="col-md-4 col-sm-4 text-right">
                                     <button class="mt-2 btn btn-danger mr-1" @click="Stop"> Stop </button>
+                                    <button class="mt-2 btn btn-info ml-1" @click="docycle"> Do </button>
                                     <!-- <button class="mt-2 btn btn-success "  @click="Disengage"> Disengage
                                         Brake </button> -->
                                 </div>
@@ -277,6 +283,52 @@
                                     <tbody>
 
                                         <tr v-for="(x,index) in history">
+                                            <th>{{index+1}}</td>
+                                            <td>{{x.joint1}}</td>
+                                            <td>{{x.joint2}}</td>
+                                            <td>{{x.joint3}}</td>
+                                            <td>{{x.joint4}}</td>
+                                            <td>{{x.joint5}}</td>
+                                            <td>{{x.joint6}}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th scope="row" colspan="2">Count</th>
+                                            <td>{{history.length }}</td>
+                                        </tr>
+                                    </tfoot>
+
+
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <b>Saved positions: </b>
+                            <br />
+                            <!-- <span id="history"></span> -->
+                            <div class="table-responsive" style="max-height: 26vh;">
+
+                                <table ref="table" id="store"
+                                    class="table table-nowrap table-sm text-center table-striped ">
+                                    <thead>
+
+                                        <tr>
+
+                                            <th>index</th>
+                                            <th>Joint 1</th>
+                                            <th>joint 2</th>
+                                            <th>joint 3</th>
+                                            <th>joint 4</th>
+                                            <th>joint 5</th>
+                                            <th>joint 6</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr v-for="(x,index) in store">
                                             <th>{{index+1}}</td>
                                             <td>{{x.joint1}}</td>
                                             <td>{{x.joint2}}</td>
@@ -354,6 +406,7 @@
                     main_title: 'Main title, from Vue!!',
                     keyValue: 'A',
                     speed: 100,
+                    store: [],
                 }
             },
             methods: {
@@ -380,6 +433,7 @@
                         this.connected = false
                         console.log('Connection to ROSBridge was closed!')
                     })
+                    this.store = JSON.parse(localStorage.getItem("positions"));
                 },
                 disconnect: function () {
                     this.ros.close()
@@ -446,6 +500,50 @@
 
                     this.$refs.table.scrollIntoView({ block: "end" });
                 },
+
+                Save: function () {
+
+                    let item = {
+                        joint1: this.j1,
+                        joint2: this.j2,
+                        joint3: this.j3,
+                        joint4: this.j4,
+                        joint5: this.j5,
+                        joint6: this.j6
+                    }
+                    // let positions = localStorage.getItem("positions");
+                    // positions.addItem(item);
+                    this.store.push(item)
+                    localStorage.setItem("positions", JSON.stringify(this.store));
+                },
+
+                docycle: function () {
+                    this.store = JSON.parse(localStorage.getItem("positions"));
+                    for (pos in this.store) {
+                        console.log(pos)
+                        send(pos)
+                        while (this.reach(pos));
+                        sleep(1000);
+                    }
+                },
+                reach: function (target) {
+                    if (cposition.Joint1 != target.joint1)
+                        return false;
+                    if (cposition.Joint2 != target.joint2)
+                        return false;
+                    if (cposition.Joint3 != target.joint3)
+                        return false;
+                    if (cposition.Joint4 != target.joint4)
+                        return false;
+                    if (cposition.Joint5 != target.joint5)
+                        return false;
+                    if (cposition.Joint6 != target.joint6)
+                        return false;
+                    return true;
+                },
+                sleep(milliseconds) {
+                    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+                },
                 currentPosition: function () {
                     this.j1 = Math.round(this.cposition.Joint1)
                     this.j2 = Math.round(this.cposition.Joint2)
@@ -511,11 +609,38 @@
                     // rj4 = (parseFloat(j4) * Math.PI) / 180;
                     // rj5 = (parseFloat(j5) * Math.PI) / 180;
                     // rj6 = (parseFloat(j6) * Math.PI) / 180;
-                    let newspeed= this.speed*4;
+                    let newspeed = this.speed * 4;
                     var JointState = new ROSLIB.Message({
                         name: ["j1", "j2", "j3", "j4", "j5", "j6"],
                         position: [rj1, rj2, rj3, rj4, rj5, rj6],
-                        velocity: [newspeed, newspeed, newspeed, newspeed ,newspeed, newspeed],
+                        velocity: [newspeed, newspeed, newspeed, newspeed, newspeed, newspeed],
+                        effort: [],
+                    });
+                    cmdVel.publish(JointState);
+
+                    this.addItem()
+
+                },
+                send: function (target) {
+                    var cmdVel = new ROSLIB.Topic({
+                        ros: this.ros,
+                        name: "/arm/command",
+                        messageType: "sensor_msgs/msg/JointState",
+                    });
+
+
+                    rj1 = (target.joint1 * Math.PI) / 180;
+                    rj2 = (target.joint2 * Math.PI) / 180;
+                    rj3 = (target.joint3 * Math.PI) / 180;
+                    rj4 = (target.joint4 * Math.PI) / 180;
+                    rj5 = (target.joint5 * Math.PI) / 180;
+                    rj6 = (target.joint6 * Math.PI) / 180;
+
+                    let newspeed = this.speed * 4;
+                    var JointState = new ROSLIB.Message({
+                        name: ["j1", "j2", "j3", "j4", "j5", "j6"],
+                        position: [rj1, rj2, rj3, rj4, rj5, rj6],
+                        velocity: [newspeed, newspeed, newspeed, newspeed, newspeed, newspeed],
                         effort: [],
                     });
                     cmdVel.publish(JointState);
@@ -536,51 +661,63 @@
                     switch (this.keyValue) {
                         case 'z':
                             this.j1--;
+                            this.send()
                             break;
                         case 'x':
                             this.j1++;
+                            this.send()
                             break;
 
                         case 'a':
                             this.j2--;
+                            this.send()
                             break;
                         case 's':
                             this.j2++;
+                            this.send()
                             break;
 
                         case 'q':
                             this.j3--;
+                            this.send()
                             break;
                         case 'w':
                             this.j3++;
+                            this.send()
                             break;
 
                         case 'n':
                             this.j4--;
+                            this.send()
                             break;
                         case 'm':
                             this.j4++;
+                            this.send()
                             break;
 
                         case 'k':
                             this.j5--;
+                            this.send()
                             break;
                         case 'l':
                             this.j5++;
+                            this.send()
                             break;
 
                         case 'o':
                             this.j6--;
+                            this.send()
                             break;
                         case 'p':
                             this.j6++;
+                            this.send()
                             break;
-                        case 'Enter' , 'Escape' , ' ':
+                        case 'Enter', 'Escape', ' ':
                             console.log('Stop');
                             this.Stop()
                             break;
                     }
-                    this.send()
+
                     // this.speed = 100
                 },
 
