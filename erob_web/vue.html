@@ -127,7 +127,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div>                        
+                        <div>
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">Joint 1:</span>
@@ -193,19 +193,24 @@
                                         class="slider mt-2" />
                                 </div>
                             </div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Speed:</span>
+                                </div>
+                                <input class="col-md-2 form-control" v-model="speed" max="1"
+                                    min="100" type="number" />
+                                <div class="col-md-8">
+                                    <input type="range" min="1" v-model="speed" max="100"
+                                        class="slider mt-2" />
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <div class="col-md-8 col-sm-8">
-                                    <button class="mt-2 btn btn-primary" @click="send"> Move </button>
-                                    <div class="input-group mb-2">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" >Joint 1:</span>
-                                        </div>
-                                        <!-- <input class="col-md-2 form-control" v-model="spped" max="100" min="-400" type="number" /> -->
-                                        <div class="col-md-8">
-                                            <input type="range" min="100" v-model="speed" max="400" class="slider mt-2" />{{speed}}
-                                        </div>
-                                    </div>
+                                    
+
+                                            <button class="mt-2 btn btn-primary" @click="send"> Move </button>
+                                     
                                 </div>
                                 <!-- <div class="col-md-4"></div> -->
                                 <div class="col-md-4 col-sm-4 text-right">
@@ -317,7 +322,7 @@
                     menu_title: 'Connection',
                     main_title: 'Main title, from Vue!!',
                     keyValue: 'A',
-                    speed:400,
+                    speed: 100,
                 }
             },
             methods: {
@@ -475,11 +480,11 @@
                     // rj4 = (parseFloat(j4) * Math.PI) / 180;
                     // rj5 = (parseFloat(j5) * Math.PI) / 180;
                     // rj6 = (parseFloat(j6) * Math.PI) / 180;
-
+                    let newspeed= this.speed*4;
                     var JointState = new ROSLIB.Message({
                         name: ["j1", "j2", "j3", "j4", "j5", "j6"],
                         position: [rj1, rj2, rj3, rj4, rj5, rj6],
-                        velocity: [this.speed, this.speed, this.speed, this.speed, this.speed, this.speed],
+                        velocity: [newspeed, newspeed, newspeed, newspeed ,newspeed, newspeed],
                         effort: [],
                     });
                     cmdVel.publish(JointState);
@@ -496,53 +501,53 @@
                 getKey(evt) {
                     this.keyValue = evt.key
                     console.log(evt.key)
-this.speed=100
+                    this.speed = 100
                     switch (this.keyValue) {
                         case 'z':
                             this.j1--;
-                            break; 
+                            break;
                         case 'x':
                             this.j1++;
                             break;
 
-                         case 'a':
+                        case 'a':
                             this.j2--;
-                            break; 
+                            break;
                         case 's':
                             this.j2++;
                             break;
 
-                         case 'q':
+                        case 'q':
                             this.j3--;
-                            break; 
+                            break;
                         case 'w':
                             this.j3++;
                             break;
 
-                         case 'n':
+                        case 'n':
                             this.j4--;
-                            break; 
+                            break;
                         case 'm':
                             this.j4++;
                             break;
 
-                         case 'k':
+                        case 'k':
                             this.j5--;
-                            break; 
+                            break;
                         case 'l':
                             this.j5++;
                             break;
 
-                         case 'o':
+                        case 'o':
                             this.j6--;
-                            break; 
+                            break;
                         case 'p':
                             this.j6++;
                             break;
-                        
+
                     }
                     this.send()
-                    this.speed= 400
+                    this.speed = 400
                 },
 
             },
