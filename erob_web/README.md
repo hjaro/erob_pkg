@@ -1,12 +1,14 @@
 
 ***Install and Run Web Bridge (Web Socket) on Linux***
-    
-## 0- source /opt/ros/iron/setup
+## 0- Prepare
+ -sudo su 
+ -source /opt/ros/iron/setup
 ## 1- install rosbridge_server on iron 
     sudo apt-get install ros-iron-rosbridge-server
 
 ## 2- Run rosbridge_server and it made a web socket on 9090 port
-    sudo su ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+    - 
+    - ros2 launch rosbridge_server rosbridge_websocket_launch.xml
 
 ## 3-1- Run erob_pkg
     - sodo su ros2 run erob_pkg erob_node
