@@ -195,11 +195,20 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-8 col-sm-8">
                                     <button class="mt-2 btn btn-primary" @click="send"> Move </button>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" >Joint 1:</span>
+                                        </div>
+                                        <!-- <input class="col-md-2 form-control" v-model="spped" max="100" min="-400" type="number" /> -->
+                                        <div class="col-md-8">
+                                            <input type="range" min="100" v-model="speed" max="400" class="slider mt-2" />{{speed}}
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- <div class="col-md-4"></div> -->
-                                <div class="col-md-8 col-sm-8 text-right">
+                                <div class="col-md-4 col-sm-4 text-right">
                                     <button class="mt-2 btn btn-danger mr-1" @click="Stop"> Stop </button>
                                     <!-- <button class="mt-2 btn btn-success "  @click="Disengage"> Disengage
                                         Brake </button> -->
