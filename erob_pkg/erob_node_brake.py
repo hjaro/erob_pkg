@@ -18,8 +18,8 @@ from sensor_msgs.msg import JointState
 
 master = pysoem.Master()
 # master.open(r"\Device\NPF_{7FADE00F-793A-40F6-B97C-5DB7FEE9EADA}") 
-# master.open("eno1") 
-master.open("eth0") 
+master.open("eno1") 
+# master.open("eth0") 
 
 number_of_slaves =6
 
