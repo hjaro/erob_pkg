@@ -639,6 +639,7 @@ class ErobNode(Node):
         angle=[0,0,0,0,0,0]
         sleep(0.01)
         print(f'Listener callback: {joints.position}')
+        basestep = int(joints.velocity[0])
         for i in range(number_of_slaves):
             data=struct.unpack('iiH',master.slaves[i].input)
             angle[i]= (((joints.position[i] * 180 )/ PI ) + 360)%360            
@@ -761,16 +762,19 @@ def main(args=None):
     rclpy.init(args=args)
     try:
 
-        adapters = pysoem.find_adapters()
+        # adapters = pysoem.find_adapters()
 
-        for i, adapter in enumerate(adapters):
-            print('Adapter {}'.format(i))
-            print('  {}'.format(adapter.name))
-            print('  {}'.format(adapter.desc))
+        # for i, adapter in enumerate(adapters):
+        #     print('Adapter {}'.format(i))
+        #     print('  {}'.format(adapter.name))
+        #     print('  {}'.format(adapter.desc))
 
         if  mainapp() > 0:
             mainNode = ErobNode()
             runNode = RunNode()
+
+            for i in range(number_of_slaves):
+                step[i]=0
 
             executor = MultiThreadedExecutor(num_threads=2)
             executor.add_node(mainNode)

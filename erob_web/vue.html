@@ -306,7 +306,8 @@
                     history: [],
                     menu_title: 'Connection',
                     main_title: 'Main title, from Vue!!',
-                    keyValue: 'A'
+                    keyValue: 'A',
+                    speed:400,
                 }
             },
             methods: {
@@ -485,7 +486,7 @@
                 getKey(evt) {
                     this.keyValue = evt.key
                     console.log(evt.key)
-
+this.speed=100
                     switch (this.keyValue) {
                         case 'z':
                             this.j1--;
@@ -531,6 +532,7 @@
                         
                     }
                     this.send()
+                    this.speed= 400
                 },
 
             },

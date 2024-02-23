@@ -2,7 +2,7 @@
 ***Install and Run Web Bridge (Web Socket) on Linux***
 ## 0- Prepare
     - sudo su 
-    - source /opt/ros/iron/setup
+    - source /opt/ros/iron/setup.bash
 ## 1- install rosbridge_server on iron 
     sudo apt-get install ros-iron-rosbridge-server
 
