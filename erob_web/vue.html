@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <title>ARO Robotic Systems </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
@@ -91,7 +92,7 @@
                     <div class="card-body">
                         <!-- <span id="publisher"></span> -->
                         <ul>
-                            <li v-for="(x,index) in cposition">{{index}}: {{x.toFixed(2)}}</li>
+                            <li v-for="(x,index) in cposition">{{index}}: {{Math.round(x)}}</li>
                         </ul>
                     </div>
 
@@ -469,7 +470,7 @@
                     var JointState = new ROSLIB.Message({
                         name: ["j1", "j2", "j3", "j4", "j5", "j6"],
                         position: [rj1, rj2, rj3, rj4, rj5, rj6],
-                        velocity: [10, 10, 10, 10, 10, 10],
+                        velocity: [this.speed, this.speed, this.speed, this.speed, this.speed, this.speed],
                         effort: [],
                     });
                     cmdVel.publish(JointState);

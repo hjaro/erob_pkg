@@ -619,6 +619,8 @@ class ErobNode(Node):
     def listener_stop_callback(self,msg):
         print(f'Listener callback: ***** STOP *****')
         for i in range(number_of_slaves):
+            data=struct.unpack('iiH',master.slaves[i].input)
+            target[i] = data[0]
             brake_state = brake_Engage
             step[i]=0
         # self.running = True
@@ -773,13 +775,15 @@ def main(args=None):
             mainNode = ErobNode()
             runNode = RunNode()
 
-            for i in range(number_of_slaves):
-                step[i]=0
 
             executor = MultiThreadedExecutor(num_threads=2)
             executor.add_node(mainNode)
             executor.add_node(runNode)
             
+            for i in range(0,number_of_slaves):
+                data=struct.unpack('iiH',master.slaves[i].input)
+                target[i] = data[0]
+                step[i]=0
 
             try:
                 executor.spin()
